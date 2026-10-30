@@ -89,6 +89,8 @@ switch ($opcion) {
             }
         }
 
+        $antes = $lista;
+
         $n = count($lista);
         for ($i = 0; $i < $n; $i++) {
             for ($j = 0; $j < $n - 1; $j++) {
@@ -99,7 +101,13 @@ switch ($opcion) {
                 }
             }
         }
-        $respuesta = "Primos Fibonacci ordenados: [" . implode(", ", $lista) . "]";
+
+        if (count($antes) === 0) {
+            $respuesta = "No se encontraron valores que sean primos y pertenezcan a la serie Fibonacci.";
+        } else {
+            $respuesta = "<strong>Antes del ordenamiento:</strong><br>[" . implode(", ", $antes) . "]<br><br>"
+                       . "<strong>Después del ordenamiento (mayor a menor):</strong><br>[" . implode(", ", $lista) . "]";
+        }
         break;
 
     case 4:

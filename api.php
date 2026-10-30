@@ -117,7 +117,7 @@ switch ($opcion) {
 
         for ($i = 0; $i < count($vector); $i++) {
             if ($vector[$i] > $promedio) {
-                $mayores[] = $vector[$i];
+                $mayores[] = $vector[$i] . " (posición " . $i . ")";
             }
             if ($vector[$i] < $menor) {
                 $menor = $vector[$i];
@@ -125,8 +125,10 @@ switch ($opcion) {
             }
         }
 
+        $textoMayores = count($mayores) > 0 ? "[" . implode(", ", $mayores) . "]" : "Ninguno";
+
         $respuesta = "Promedio: " . number_format($promedio, 2) . "<br>" .
-                     "Mayores al promedio: [" . implode(", ", $mayores) . "]<br>" .
+                     "Mayores al promedio: " . $textoMayores . "<br>" .
                      "Menor: " . $menor . " (posición " . $posMenor . ")";
         break;
 

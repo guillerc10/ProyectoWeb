@@ -110,7 +110,7 @@ sequenceDiagram
   2. Recorrer el vector para obtener:
      * Lista de todos los números que superan dicho promedio (`$vector[$i] > $promedio`).
      * El número de menor valor junto con su posición (índice).
-* **Resultado**: Promedio formateado a 2 decimales, subvector de números mayores al promedio y el número menor con su posición.
+* **Resultado**: Promedio formateado a 2 decimales, lista de números mayores al promedio con sus respectivas posiciones y el número menor con su posición.
 
 ---
 

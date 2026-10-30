@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio Vectores</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="contenedor">
+    <h1>Ejercicio de Vectores</h1>
+
+    <div class="campo">
+      <label>Tamaño del vector:</label>
+      <input type="number" id="tamano">
+      <button onclick="definirTamano()">Definir tamaño</button>
+    </div>
+
+    <div class="campo">
+      <label>Ingresar número:</label>
+      <input type="number" id="numero">
+      <button onclick="agregarNumero()">Agregar</button>
+      <button onclick="reiniciar()">Reiniciar</button>
+    </div>
+
+    <p id="mensaje"></p>
+    <p id="mostrarVector"><strong>Vector:</strong> []</p>
+
+    <hr>
+
+    <h3>Opciones:</h3>
+    <button class="btn-opcion" onclick="opcion1()">1. Contar primos en pos. Fibonacci y múltiplo de 3</button>
+    <button class="btn-opcion" onclick="opcion2()">2. Contar primos en pos. primas y múltiplos de 3, 4, 5 o 7</button>
+    <button class="btn-opcion" onclick="opcion3()">3. Ordenar burbuja primos Fibonacci (mayor a menor)</button>
+    <button class="btn-opcion" onclick="opcion4()">4. Promedio, mayor al promedio y menor con posición</button>
+
+    <h3>Resultado:</h3>
+    <div id="resultado">Esperando que selecciones una opción...</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

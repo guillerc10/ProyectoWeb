@@ -2,24 +2,53 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Ejercicio Vectores</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyecto Ingeniería de Software</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="contenedor">
     <h1>Ejercicio de Vectores</h1>
 
+    <div class="integrantes-contenedor">
+      <span class="integrantes-titulo">Integrantes</span>
+      <div class="integrantes-lista">
+        <div class="integrante-item">
+          <span class="nombre">Cáceres, Guillermo</span>
+          <span class="cedula">C.I. 31.754.868</span>
+        </div>
+        <div class="integrante-item">
+          <span class="nombre">León, David</span>
+          <span class="cedula">C.I. 29.652.880</span>
+        </div>
+        <div class="integrante-item">
+          <span class="nombre">Parra, Andres</span>
+          <span class="cedula">C.I. 31.331.597</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="enunciado-contenedor">
+      <span class="enunciado-titulo">Enunciado del problema:</span>
+      <ol class="enunciado-lista">
+        <li>Contar los valores que sean primos en las posiciones que pertenezcan a la serie Fibonacci y sean múltiplos de 3.</li>
+        <li>Contar los valores primos en posiciones primas que sean múltiplos de 3, 4, 5 o 7.</li>
+        <li>Ordenar el vector con el método de la burbuja de mayor a menor (&gt; a &lt;) solo primos que sean de la serie Fibonacci.</li>
+        <li>Promedio de los valores, números mayores al promedio y menor indicando su posición después de ordenar según el punto (3).</li>
+      </ol>
+    </div>
+
     <div class="campo">
       <label>Tamaño del vector:</label>
-      <input type="number" id="tamano">
-      <button onclick="definirTamano()">Definir tamaño</button>
+      <input type="number" id="tamano" min="1" max="50" step="1">
+      <button class="btn-primary" onclick="definirTamano()">Definir tamaño</button>
     </div>
 
     <div class="campo">
       <label>Ingresar número:</label>
-      <input type="number" id="numero">
-      <button onclick="agregarNumero()">Agregar</button>
-      <button onclick="reiniciar()">Reiniciar</button>
+      <input type="number" id="numero" min="0" max="1000000" step="1">
+      <button id="btnAgregar" class="btn-success" onclick="agregarNumero()">Agregar</button>
+      <button class="btn-danger" onclick="reiniciar()">Reiniciar</button>
     </div>
 
     <p id="mensaje"></p>
@@ -28,10 +57,10 @@
     <hr>
 
     <h3>Opciones:</h3>
-    <button class="btn-opcion" onclick="opcion1()">1. Contar primos en pos. Fibonacci y múltiplo de 3</button>
-    <button class="btn-opcion" onclick="opcion2()">2. Contar primos en pos. primas y múltiplos de 3, 4, 5 o 7</button>
-    <button class="btn-opcion" onclick="opcion3()">3. Ordenar burbuja primos Fibonacci (mayor a menor)</button>
-    <button class="btn-opcion" onclick="opcion4()">4. Promedio, mayor al promedio y menor con posición</button>
+    <button class="btn-opcion" onclick="opcion1()" disabled>1. Contar primos en pos. Fibonacci y múltiplo de 3</button>
+    <button class="btn-opcion" onclick="opcion2()" disabled>2. Contar primos en pos. primas y múltiplos de 3, 4, 5 o 7</button>
+    <button class="btn-opcion" onclick="opcion3()" disabled>3. Ordenar burbuja primos Fibonacci (mayor a menor)</button>
+    <button class="btn-opcion" onclick="opcion4()" disabled>4. Promedio, mayor al promedio y menor con posición</button>
 
     <h3>Resultado:</h3>
     <div id="resultado">Esperando que selecciones una opción...</div>

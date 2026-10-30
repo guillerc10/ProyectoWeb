@@ -1,19 +1,42 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 
-// Obtener datos JSON enviados desde fetch en JavaScript
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
 
-if (!$data || !isset($data['opcion']) || !isset($data['vector'])) {
+if (!$data || !isset($data['opcion']) || !isset($data['vector']) || !is_array($data['vector'])) {
     echo json_encode(['error' => 'Datos inválidos o vector no recibido']);
     exit;
 }
 
 $opcion = (int)$data['opcion'];
+if ($opcion < 1 || $opcion > 4) {
+    echo json_encode(['error' => 'Opción no válida']);
+    exit;
+}
+
 $vector = $data['vector'];
 
-// Funciones auxiliares
+if (count($vector) === 0 || count($vector) > 50) {
+    echo json_encode(['error' => 'El vector debe contener entre 1 y 50 elementos']);
+    exit;
+}
+
+foreach ($vector as $val) {
+    if (!is_int($val)) {
+        echo json_encode(['error' => 'Todos los elementos deben ser números enteros']);
+        exit;
+    }
+    if ($val < 0) {
+        echo json_encode(['error' => 'No se permiten números negativos']);
+        exit;
+    }
+    if ($val > 1000000) {
+        echo json_encode(['error' => 'Los números no pueden superar 1,000,000']);
+        exit;
+    }
+}
+
 function esPrimo($n) {
     if ($n < 2) return false;
     for ($i = 2; $i * $i <= $n; $i++) {
@@ -38,7 +61,6 @@ $respuesta = '';
 
 switch ($opcion) {
     case 1:
-        // Contar primos en posiciones Fibonacci múltiplos de 3
         $cont = 0;
         for ($i = 0; $i < count($vector); $i++) {
             if (esPrimo($vector[$i]) && esFibonacci($i) && ($i % 3 === 0)) {
@@ -49,7 +71,6 @@ switch ($opcion) {
         break;
 
     case 2:
-        // Contar primos en posiciones primas y múltiplos de 3, 4, 5 o 7
         $cont = 0;
         for ($i = 0; $i < count($vector); $i++) {
             $multiplo = ($i % 3 === 0 || $i % 4 === 0 || $i % 5 === 0 || $i % 7 === 0);
@@ -61,7 +82,6 @@ switch ($opcion) {
         break;
 
     case 3:
-        // Ordenar con burbuja de mayor a menor solo primos Fibonacci
         $lista = [];
         for ($i = 0; $i < count($vector); $i++) {
             if (esPrimo($vector[$i]) && esFibonacci($vector[$i])) {
@@ -69,7 +89,6 @@ switch ($opcion) {
             }
         }
 
-        // Método de la burbuja descendente
         $n = count($lista);
         for ($i = 0; $i < $n; $i++) {
             for ($j = 0; $j < $n - 1; $j++) {
@@ -84,7 +103,6 @@ switch ($opcion) {
         break;
 
     case 4:
-        // Promedio, mayores al promedio y menor con posición
         if (count($vector) === 0) {
             $respuesta = "El vector está vacío";
             break;

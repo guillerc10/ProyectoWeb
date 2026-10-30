@@ -1,19 +1,23 @@
-/* 
-   Programa de operaciones con vectores:
-   1. Contar valores primos en posiciones Fibonacci múltiplos de 3.
-   2. Contar valores primos en posiciones primas múltiplos de 3, 4, 5 o 7.
-   3. Ordenar con burbuja de mayor a menor solo primos que sean de Fibonacci.
-   4. Promedio del vector, mayores al promedio y menor con su posición.
-*/
-
 let vector = [];
 let tamano = 0;
 
 function definirTamano() {
-    tamano = Number(document.getElementById("tamano").value);
+    let input = document.getElementById("tamano").value.trim();
+    let valor = Number(input);
+
+    if (input === "" || !Number.isInteger(valor) || valor < 1 || valor > 50) {
+        alert("El tamaño debe ser un número entero entre 1 y 50");
+        return;
+    }
+
+    if (vector.length > 0 && !confirm("¿Deseas cambiar el tamaño y reiniciar el vector actual?")) {
+        return;
+    }
+
+    tamano = valor;
     vector = [];
-    document.getElementById("mostrarVector").innerText = "Vector: []";
-    document.getElementById("mensaje").innerText = "Tamaño: " + tamano;
+    document.getElementById("resultado").innerText = "Esperando que selecciones una opción...";
+    actualizarEstado();
 }
 
 function agregarNumero() {
@@ -21,15 +25,40 @@ function agregarNumero() {
         alert("Define primero el tamaño");
         return;
     }
-    if (vector.length < tamano) {
-        let num = Number(document.getElementById("numero").value);
-        vector.push(num);
-        document.getElementById("numero").value = "";
-        document.getElementById("mostrarVector").innerText = "Vector: [" + vector.join(", ") + "]";
-        document.getElementById("mensaje").innerText = vector.length + " de " + tamano;
-    } else {
+
+    if (vector.length >= tamano) {
         alert("El vector ya está lleno");
+        return;
     }
+
+    let campoNumero = document.getElementById("numero");
+    let valorTexto = campoNumero.value.trim();
+
+    if (valorTexto === "") {
+        alert("Ingresa un número");
+        return;
+    }
+
+    let num = Number(valorTexto);
+
+    if (!Number.isInteger(num)) {
+        alert("Solo se permiten números enteros");
+        return;
+    }
+
+    if (num < 0) {
+        alert("No se permiten números negativos");
+        return;
+    }
+
+    if (num > 1000000) {
+        alert("El número no puede ser mayor a 1,000,000");
+        return;
+    }
+
+    vector.push(num);
+    campoNumero.value = "";
+    actualizarEstado();
 }
 
 function reiniciar() {
@@ -37,15 +66,34 @@ function reiniciar() {
     tamano = 0;
     document.getElementById("tamano").value = "";
     document.getElementById("numero").value = "";
-    document.getElementById("mostrarVector").innerText = "Vector: []";
-    document.getElementById("mensaje").innerText = "";
-    document.getElementById("resultado").innerText = "";
+    document.getElementById("resultado").innerText = "Esperando que selecciones una opción...";
+    actualizarEstado();
 }
 
-// Envía los datos al backend en PHP para su procesamiento
+function actualizarEstado() {
+    document.getElementById("mostrarVector").innerText = "Vector: [" + vector.join(", ") + "]";
+    
+    if (tamano > 0) {
+        document.getElementById("mensaje").innerText = vector.length + " de " + tamano;
+    } else {
+        document.getElementById("mensaje").innerText = "";
+    }
+
+    let estaCompleto = tamano > 0 && vector.length === tamano;
+    let botonesOpcion = document.querySelectorAll(".btn-opcion");
+    botonesOpcion.forEach(function(btn) {
+        btn.disabled = !estaCompleto;
+    });
+
+    let btnAgregar = document.getElementById("btnAgregar");
+    if (btnAgregar) {
+        btnAgregar.disabled = tamano === 0 || vector.length >= tamano;
+    }
+}
+
 async function procesarOpcion(opcion) {
-    if (vector.length === 0) {
-        alert("Primero debes ingresar elementos al vector");
+    if (tamano === 0 || vector.length !== tamano) {
+        alert("Debes llenar el vector por completo antes de seleccionar una opción");
         return;
     }
 
@@ -80,3 +128,8 @@ function opcion1() { procesarOpcion(1); }
 function opcion2() { procesarOpcion(2); }
 function opcion3() { procesarOpcion(3); }
 function opcion4() { procesarOpcion(4); }
+
+actualizarEstado();
+
+
+actualizarEstado();
